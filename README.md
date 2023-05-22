@@ -5,15 +5,6 @@
 
 </p>
 
-
-## Table Of Contents
-
--   [About the Project](#about-the-project)
--   [Built With](#built-with)
--   [Installation](#installation)
--   [License](#license)
--   [Authors](#authors)
-
 ## About The Project
 
 This is a lightweight script that allows you to search for any movie or TV show across multiple countries on all flat-rate streaming providers simultaneously.
@@ -24,7 +15,7 @@ The script is using the unofficial [JustWatch API](https://github.com/dawoudt/Ju
 -   python
 
 
-### Installation:
+## Installation:
 
 1. Install the Requirements:
 
