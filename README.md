@@ -20,7 +20,7 @@ The script is using the unofficial [JustWatch API](https://github.com/dawoudt/Ju
 1. Install the Requirements:
 
 ```sh
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 2. Run the Script:
