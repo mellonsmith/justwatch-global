@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
 
-  <h1 align="center">JustWatch Global</h3>
+  <h1 align="center">JustWatch Global Search</h3>
 
 </p>
 
