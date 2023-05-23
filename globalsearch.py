@@ -1,14 +1,13 @@
 from justwatch import JustWatch
-searchcountrys = ['US', 'GB', 'DE', 'FR', 'CA', 'AU', 'NZ', 'IN', 'IT', 'ES', 'BR', 'MX']
-#searchcountrys = ['US']
+import prettytable
+searchcountrys = ['US', 'GB', 'DE', 'FR', 'CA', 'AU', 'NZ', 'IN', 'IT', 'ES', 'BR', 'MX']   # List of countries to search for streaming providers
+
 def get_streaming_providers(title, mycountry):
-    # Search for the title
     just_watch = JustWatch(country=mycountry)
     results = just_watch.search_for_item(query=title)
-    # Get the streaming providers
     streaming_providers = []
     for provider in results['items'][0]['offers']:
-        if provider['monetization_type'] == 'flatrate':
+        if provider['monetization_type'] == 'flatrate':     # Only include providers that offer a flatrate subscription
             provider_dict = [
                 provider['package_short_name'],
                 provider['urls']['standard_web']
@@ -21,7 +20,15 @@ def main():
     print("Searching for streaming providers...")
     for country in searchcountrys:
         streaming_providers = get_streaming_providers(title, country)
-        print(country + ": " + str(streaming_providers) + "\n")
+        if len(streaming_providers) != 0:
+            streaming_providers = list(set(tuple(provider) for provider in streaming_providers))    # Remove duplicates
+            print("Found {} streaming providers in {}:".format(len(streaming_providers), country))
+            mytable = prettytable.PrettyTable()
+            mytable.field_names = ["Provider", "URL"]
+            for provider in streaming_providers:
+                mytable.add_row([provider[0], provider[1]])
+            print(mytable)
+            print("\n")
 
 if __name__ == '__main__':
     main()
