@@ -6,18 +6,20 @@ def get_streaming_providers(title, mycountry):
     just_watch = JustWatch(country=mycountry)
     results = just_watch.search_for_item(query=title)
     streaming_providers = []
-    for provider in results['items'][0]['offers']:
-        if provider['monetization_type'] == 'flatrate':     # Only include providers that offer a flatrate subscription
-            provider_dict = [
-                provider['package_short_name'],
-                provider['urls']['standard_web']
-                ]
-            streaming_providers.append(provider_dict)
-    return streaming_providers
+    if (len(results['items']) != 0):
+        for provider in results['items'][0]['offers']:
+            if provider['monetization_type'] == 'flatrate':     # Only include providers that offer a flatrate subscription
+                provider_dict = [
+                    provider['package_short_name'],
+                    provider['urls']['standard_web']
+                    ]
+                streaming_providers.append(provider_dict)
+    return streaming_providers 
 
 def main():
     title = input("Enter the title of the movie or TV show: ")
     print("Searching for streaming providers...")
+    found = False
     for country in searchcountrys:
         streaming_providers = get_streaming_providers(title, country)
         if len(streaming_providers) != 0:
@@ -29,6 +31,9 @@ def main():
                 mytable.add_row([provider[0], provider[1]])
             print(mytable)
             print("\n")
+            found = True
+    if not found : 
+        print(f"No streaming services were found that stream {title}.")
 
 if __name__ == '__main__':
     main()
